@@ -8,6 +8,11 @@ public class TouchMove : TouchControl
     public float speedForward=0.05f;
     public float speedSide=0.05f;
 
+
+    public bool clampMinY=true;
+    public float minY=0;
+
+
     void Start()
     {
         
@@ -20,9 +25,16 @@ public class TouchMove : TouchControl
 
 
             Vector2 move=t.deltaPosition;
+            Vector3 pos=transform.position;
 
-            transform.position+=transform.forward*move.y*speedForward;
-            transform.position+=transform.right*move.x*speedSide;
+            pos+=transform.forward*move.y*speedForward;
+            pos+=transform.right*move.x*speedSide;
+
+            if(clampMinY){
+                pos.y=Mathf.Max(minY, pos.y);
+            }
+
+            transform.position=pos;
 
         };
 
