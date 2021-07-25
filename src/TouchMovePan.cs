@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TouchMove : TouchControl
+public class TouchMovePan : TouchControl
 {
+
     public float speedForward=0.05f;
     public float speedSide=0.05f;
 
@@ -38,7 +39,6 @@ public class TouchMove : TouchControl
         };
 
     }
-
 
 
 }

@@ -12,11 +12,14 @@ public class MouseLook : MonoBehaviour
     public bool invertX=false;
     public bool invertY=false;
 
+
+    bool once=true;
+
    
     void OnStart(){
 
     	//zero initial rotation;
-    	rotation=(Vector2) transform.eulerAngles/speed;
+    	
 
     }
 
@@ -27,14 +30,23 @@ public class MouseLook : MonoBehaviour
 			return;
     	}
 
+
+
+
         if(freeLook){
             Cursor.visible = false;
+            //Cursor.lockState = CursorLockMode.Confined;
         }else{
             Cursor.visible = true;
         }
 
         if(freeLook||Input.GetMouseButton(buttonIndex)){
 
+
+            if(once){
+                rotation=(Vector2) transform.eulerAngles/speed;
+                once=false;
+            }
 
             bool inv=freeLook;
 
