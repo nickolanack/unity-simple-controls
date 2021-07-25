@@ -26,10 +26,6 @@ public class DragRotate : MonoBehaviour
         }
         if(Input.GetMouseButton(mouseButton)){
 
-            Vector3 localStart=Camera.main.transform.localEulerAngles;
-
-
-
             float y=(Input.mousePosition.y-start.y)*speed;
             float x=(Input.mousePosition.x-start.x)*sideSpeed;
             transform.RotateAround(transform.position, Camera.main.transform.up, -x); 
