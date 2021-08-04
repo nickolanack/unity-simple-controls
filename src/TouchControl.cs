@@ -6,18 +6,19 @@ public abstract class TouchControl : MonoBehaviour
 {
 
 
-    public delegate void UseTouch(Touch t);
+    public delegate void TouchEvent(Touch t);
     public delegate bool FilterTouch(Touch t);
+    
     public FilterTouch shouldUseTouch=delegate(Touch t){ return true; };
-    public UseTouch touchStart=delegate(Touch t){  };
-    public UseTouch touchMove=delegate(Touch t){  };
-    public UseTouch touchEnd=delegate(Touch t){  };
+    public TouchEvent touchStart=delegate(Touch t){  };
+    public TouchEvent touchMove=delegate(Touch t){  };
+    public TouchEvent touchEnd=delegate(Touch t){  };
 
 
     int fingerId=-1;
 
 
-    void Update()
+    protected virtual void Update()
     {
         
 
@@ -57,10 +58,6 @@ public abstract class TouchControl : MonoBehaviour
             }
 
         }
-
-
-
-
 
     }
 }

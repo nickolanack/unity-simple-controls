@@ -22,31 +22,43 @@ public class KeyMove : MonoBehaviour
     void Update()
     {
         
+        if(!(Input.GetKey(left)||Input.GetKey(right)||Input.GetKey(forward)||Input.GetKey(back))){
+            return;
+        }
 
+        Vector3 move=Vector3.zero;
 
 
        if(Input.GetKey(left)){
-            transform.position-=transform.right*Time.deltaTime*sideSpeed;
+            move-=RightDir()*Time.deltaTime*sideSpeed;
        }else if(Input.GetKey(right)){
-            transform.position+=transform.right*Time.deltaTime*sideSpeed; 
+           move+=RightDir()*Time.deltaTime*sideSpeed; 
        }
-
 
        if(Input.GetKey(forward)){
 
-
-
-            transform.position +=Forward()*Time.deltaTime*speed;
-            Clamp();
+            move +=Forward()*Time.deltaTime*speed;
 
        }else if(Input.GetKey(back)){
-            transform.position -=Forward()*Time.deltaTime*speed;
-            Clamp();
+            move -=Forward()*Time.deltaTime*speed;
        }
 
+       ApplyMove(move);
+       Clamp();
+
+    }
+
+    protected virtual void ApplyMove(Vector3 move){
+        transform.position+=move;
+    }
 
 
+    protected virtual Vector3 RightDir(){
+        return transform.right;
+    }
 
+    protected virtual Vector3 ForwardDir(){
+        return transform.forward;
     }
 
     Vector3 Forward(){
@@ -57,13 +69,13 @@ public class KeyMove : MonoBehaviour
         }
 
         if(clamp){
-            Vector3 dir=transform.forward;
+            Vector3 dir=ForwardDir();
             dir.y=0;
             dir=dir.normalized;
             return dir;
         }
 
-        return transform.forward;
+        return ForwardDir();
     }
 
 
