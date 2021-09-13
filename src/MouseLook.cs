@@ -40,13 +40,20 @@ public class MouseLook : MonoBehaviour
             Cursor.visible = true;
         }
 
+
+        if((!freeLook)&&Input.GetMouseButtonDown(buttonIndex)){
+
+            bool inv=freeLook;
+
+            rotation=(Vector2) transform.eulerAngles/speed;
+            rotation.y -= (inv?-1:1)*(invertX?-1:1)*-Input.GetAxis ("Mouse X");
+            rotation.x -= (inv?-1:1)*(invertY?-1:1)*Input.GetAxis ("Mouse Y");
+        }
+
+
         if(freeLook||Input.GetMouseButton(buttonIndex)){
 
 
-            if(once){
-                rotation=(Vector2) transform.eulerAngles/speed;
-                once=false;
-            }
 
             bool inv=freeLook;
 
